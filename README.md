@@ -1,2 +1,2 @@
 # TSCPL
-Port of @RJmsG's ACPL to TypeScript
+Port of **[@RJmsG](https://github.com/RJmsG)**'s ACPL to TypeScript
