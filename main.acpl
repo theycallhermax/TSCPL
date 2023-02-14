@@ -1,12 +1,1 @@
-# Printing to console
 outln "Hello world!"
-
-# Variables
-str string "Hello world!"
-int number 1
-
-# Print a variable to console
-str variable_demo "Hello world!"
-outs variable_demo
-
-# That's it!
