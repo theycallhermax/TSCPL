@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# ACPL files
+*.acpl
+
+# Compiled ACPL files
+*.acpl.ts
