@@ -1,4 +1,3 @@
-![The TSCPL logo](https://u.cubeupload.com/MDWalters/2nw3cy.jpg)
 # TSCPL
 TSCPL (**T**ype**S**cript **C**omplicated **P**rogramming **L**anguage) is a compiler inspired by ACPL. The original ACPL compiler compiles ACPL files to C, but TSCPL can compile ACPL files to TypeScript and even run ACPL files after compilation.
 ## Compiling and Running ACPL files
