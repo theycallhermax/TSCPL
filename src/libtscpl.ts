@@ -34,7 +34,7 @@ export function compile(file: string, output_file_name: string): void {
             fs.appendFile(output_file_name, "\n", callback);
             continue;
         } else {
-            throw new Error(`ERROR: Invalid syntax at line ${parseInt(i) + 1}`);
+            throw `Invalid syntax at line ${parseInt(i) + 1}`;
         }
     }
 }

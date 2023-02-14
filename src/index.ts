@@ -19,7 +19,7 @@ function appendFileCallback(err): void {
 
 if (yargs.argv._[0] === undefined) {
     console.log(chalk.whiteBright("TSCPL is a compiler inspired by ACPL. It's goal is to provide a ACPL compiler written in TypeScript."));
-    console.log(chalk.whiteBright(`To learn more, see ${chalk.blueBright.bold("https://github.com/mdwalters/TSCPL#readme")}`));
+    console.log(chalk.whiteBright(`To learn more, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#readme")}`));
     exit(0);
 }
 
@@ -28,7 +28,7 @@ console.log(chalk.yellowBright(`Compiling ${chalk.yellowBright.bold(yargs.argv["
 try {
     compile(yargs.argv._[0], `${yargs.argv._[0]}.ts`);
 } catch(e) {
-    console.log(chalk.redBright(e));
+    console.log(chalk.redBright(`${e} at ${chalk.redBright.bold(yargs.argv._[0])}`));
     console.error(chalk.redBright(`Unsuccessfully compiled ${chalk.redBright.bold(yargs.argv._[0])}.`));
     exit(1);
 }
