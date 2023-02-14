@@ -14,7 +14,7 @@ function appendFileCallback(err): void {
     }
 }
 
-console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.0"));
+console.log(chalk.hex("#0077ff").bold("TSCPL v1.1.0"));
 
 if (yargs.argv._[0] === undefined) {
     console.error(chalk.redBright("ERROR: Input file is required"));
