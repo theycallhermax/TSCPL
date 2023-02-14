@@ -5,6 +5,7 @@ import * as fs from "fs";
 import chalk from "chalk";
 import { exit } from "process";
 import { exec } from "child_process";
+import { compile } from "./libtscpl";
 
 console.log(chalk.hex("#0077ff").bold("TSCPL v1.1.1"));
 
