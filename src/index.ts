@@ -7,11 +7,12 @@ import { exit } from "process";
 import { exec } from "child_process";
 import { compile } from "./libtscpl";
 
-console.log(chalk.hex("#0077ff").bold("TSCPL v1.1.1"));
+console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.0"));
 
 if (yargs.argv._[0] === undefined) {
     console.log(chalk.whiteBright("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript."));
     console.log(chalk.whiteBright(`To learn more, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#readme")}`));
+    console.log(chalk.whiteBright(`To learn more about libtscpl, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#libtscpl")}`));
     exit(0);
 }
 
@@ -26,9 +27,9 @@ try {
 }
 
 console.log(chalk.greenBright(`Successfully compiled ${chalk.greenBright.bold(yargs.argv._[0])} as ${chalk.greenBright.bold(`${yargs.argv._[0]}.ts`)}.`));
-console.log(chalk.yellowBright(`Running ${chalk.yellowBright.bold(`${yargs.argv._[0]}.ts`)}...`));
 
 if (yargs.argv.run === true) {
+    console.log(chalk.yellowBright(`Running ${chalk.yellowBright.bold(`${yargs.argv._[0]}.ts`)}...`));
     exec(`npx ts-node ${yargs.argv._[0]}.ts`, (error, stdout, stderr) => {
         if (error) {
             console.error(error);
