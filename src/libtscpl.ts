@@ -7,7 +7,7 @@ import * as fs from "fs";
 * @param output_file_name The name of the output file
 */
 export function compile(file: string, output_file_name: string): void {
-    let file: string[] = file.split("\n");
+    let file: string[] = fs.readFileSync(file, "utf-8").split("\n");
     fs.writeFileSync(output_file_name, "");
 
     for (let i in file) {
