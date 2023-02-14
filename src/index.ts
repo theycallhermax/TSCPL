@@ -6,18 +6,19 @@ import chalk from "chalk";
 import { exit } from "process";
 import { exec } from "child_process";
 
+console.log(chalk.hex("#0077ff").bold("TSCPL v1.1.1"));
+
 function appendFileCallback(err): void {
     if (err) {
-      console.error(chalk.redBright(`ERROR: ${err}`));
+      console.error(chalk.redBright(err));
       console.error(chalk.redBright(`Unsuccessfully compiled ${chalk.redBright.bold(yargs.argv._[0])}.`));
       exit(1);
     }
 }
 
-console.log(chalk.hex("#0077ff").bold("TSCPL v1.1.1"));
-
 if (yargs.argv._[0] === undefined) {
-    console.log(chalk.whiteBright("TSCPL is a compiler"));
+    console.log(chalk.whiteBright("TSCPL is a compiler inspired by ACPL. It's goal is to provide a ACPL compiler written in TypeScript."));
+    console.log(chalk.whiteBright(`To learn more, see ${chalk.blueBright.bold("https://github.com/mdwalters/TSCPL#readme")}`));
     exit(0);
 }
 
