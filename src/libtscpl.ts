@@ -19,10 +19,18 @@ export function compile(file: string, output_file_name: string): void {
             fs.appendFile(output_file_name, `console.log(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")});\n`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "str") {
-            fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: string = ${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(" ")};\n`, callback);
+            if (file_split[i].split(" ")[1].length === 0) {
+                fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: string;\n`, callback);
+            } else {
+                fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: string = ${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(" ")};\n`, callback);
+            }
             continue;
         } else if (file_split[i].split(" ")[0] === "int") {
-            fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: number = ${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(" ")};\n`, callback);
+            if (file_split[i].split(" ")[1].length === 0) {
+                fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: number;\n`, callback);
+            } else {
+                fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: number = ${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(" ")};\n`, callback);
+            }
             continue;
         } else if (file_split[i].split("")[0] === "#") {
             fs.appendFile(output_file_name, `//${file_split[i].split("").slice(1, file_split[i].split("").length).join("")}\n`, callback);

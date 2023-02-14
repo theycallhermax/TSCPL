@@ -4,12 +4,12 @@ TSCPL (**T**ype**S**cript **C**omplicated **P**rogramming **L**anguage) is a com
 ### Compiling
 To compile a ACPL file, you just need to run the following command:
 ```bash
-tscpl [ACPL script here]
+npx tscpl [ACPL script here]
 ```
 ### Running
 Since version 1.1.0, TSCPL can run ACPL files automatically after the file is compiled. To do this, run the following command:
 ```bash
-tscpl [ACPL script here] --run
+npx tscpl [ACPL script here] --run
 ```
 # libtscpl
 Since version 1.2.0, libtscpl is the backend for TSCPL written in TypeScript. It provides TSCPL with it's core functions, such as compiling ACPL files.
