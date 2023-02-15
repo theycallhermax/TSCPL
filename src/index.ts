@@ -23,7 +23,7 @@ console.log(chalk.yellowBright(`Compiling ${chalk.yellowBright.bold(yargs.argv["
 try {
     compile(yargs.argv._[0], output_file);
 } catch(e) {
-    console.log(chalk.redBright(`${e} at ${chalk.redBright.bold(yargs.argv._[0])}`));
+    console.log(chalk.redBright(`${e} of ${chalk.redBright.bold(yargs.argv._[0])}`));
     console.error(chalk.redBright(`Unsuccessfully compiled ${chalk.redBright.bold(yargs.argv._[0])}.`));
     exit(1);
 }

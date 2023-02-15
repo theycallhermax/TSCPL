@@ -17,6 +17,17 @@ export function compile(file: string, output_file_name: string): void {
     fs.writeFileSync(output_file_name, "");
 
     for (let i in file_split) {
+        if (file_split[i].split("")[0] === "in") {
+            fs.appendFile(output_file_name, `import readline from "readline";
+const prompt = readline.createInterface({ 
+    input: process.stdin,
+    output: process.stdout
+});`, callback);
+            break;
+        }
+    }
+
+    for (let i in file_split) {
         if (file_split[i].split(" ")[0] === "outln") {
             fs.appendFile(output_file_name, `console.log(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")});\n`, callback);
             continue;
@@ -39,7 +50,6 @@ export function compile(file: string, output_file_name: string): void {
             }
             continue;
         } else if (file_split[i].split("")[0] === "#") {
-            fs.appendFile(output_file_name, `//${file_split[i].split("").slice(1, file_split[i].split("").length).join("")}\n`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "outs") {
             if (!(variables.includes(file_split[i].split(" ")[1]))) {
@@ -49,7 +59,6 @@ export function compile(file: string, output_file_name: string): void {
             fs.appendFile(output_file_name, `console.log(${file_split[i].split(" ")[1]});\n`, callback);
             continue;
         } else if (file_split[i] === "") {
-            fs.appendFile(output_file_name, "\n", callback);
             continue;
         } else if (file_split[i].split("")[0] === "in") {
             fs.appendFile(output_file_name, "\n", callback);
