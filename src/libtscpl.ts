@@ -51,6 +51,9 @@ export function compile(file: string, output_file_name: string): void {
         } else if (file_split[i] === "") {
             fs.appendFile(output_file_name, "\n", callback);
             continue;
+        } else if (file_split[i].split("")[0] === "in") {
+            fs.appendFile(output_file_name, "\n", callback);
+            continue;
         } else {
             throw `Invalid statement at line ${parseInt(i) + 1}`;
         }
