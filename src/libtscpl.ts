@@ -61,7 +61,8 @@ const prompt = readline.createInterface({
         } else if (file_split[i] === "") {
             continue;
         } else if (file_split[i].split(" ")[0] === "in") {
-            fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]} = prompt.question("", (input) => { ${file_split[i].split(" ")[1]} = input; })`, callback);
+            fs.appendFile(output_file_name, `// @ts-ignore
+let ${file_split[i].split(" ")[1]} = prompt.question("", (input) => { ${file_split[i].split(" ")[1]} = input; prompt.close(); });`, callback);
             continue;
         } else {
             throw `Invalid statement at line ${parseInt(i) + 1}`;
