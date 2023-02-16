@@ -12,7 +12,9 @@ function callback(): void {
 */
 export function compile(file: string, output_file_name: string): void {
     let file_split: string[] = fs.readFileSync(file, "utf-8").split("\n");
+
     let variables: string[] = [];
+    let functions: string[] = [];
 
     fs.writeFileSync(output_file_name, "");
 
@@ -61,10 +63,21 @@ const prompt = readline.createInterface({
         } else if (file_split[i] === "") {
             continue;
         } else if (file_split[i].split(" ")[0] === "func") {
-            fs.appendFile(output_file_name, `function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(", ")})\n`, callback);
+            functions.push(file_split[i].split(" ")[1]);
+            fs.appendFile(output_file_name, `function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(", ")})`, callback);
+            continue;
+        } else if (file_split[i].split(" ")[0] === ":") {
+            fs.appendFile(output_file_name, ` {\n`, callback);
+            continue;
+        } else if (file_split[i].split(" ")[0] === ";") {
+            fs.appendFile(output_file_name, `}\n`, callback);
             continue;
         } else {
-            throw `Invalid statement at line ${parseInt(i) + 1}`;
+            if (functions.includes(file_split[i].split(" ")[0])) {
+                fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]}();\n`, callback);
+            } else {
+                throw `Invalid statement at line ${parseInt(i) + 1}`;
+            }
         }
     }
 }
