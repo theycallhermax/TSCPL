@@ -17,12 +17,12 @@ export function compile(file: string, output_file_name: string): void {
     fs.writeFileSync(output_file_name, "");
 
     for (let i in file_split) {
-        if (file_split[i].split("")[0] === "in") {
+        if (file_split[i].split(" ")[0] === "in") {
             fs.appendFile(output_file_name, `import readline from "readline";
 const prompt = readline.createInterface({ 
     input: process.stdin,
     output: process.stdout
-});`, callback);
+});\n`, callback);
             break;
         }
     }
@@ -61,7 +61,7 @@ const prompt = readline.createInterface({
         } else if (file_split[i] === "") {
             continue;
         } else if (file_split[i].split(" ")[0] === "in") {
-            fs.appendFile(output_file_name, "\n", callback);
+            fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]} = prompt.question(${file_split[i].split(" ")[2]})`, callback);
             continue;
         } else {
             throw `Invalid statement at line ${parseInt(i) + 1}`;
