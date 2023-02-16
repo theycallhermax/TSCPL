@@ -14,9 +14,9 @@ let output_file: string = (yargs.argv.output ? yargs.argv.output : `${yargs.argv
 if (yargs.argv._[0] === undefined) {
     console.log(chalk.whiteBright("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript."));
     console.log("");
-    console.log(chalk.whiteBright(`To learn more, see ${chalk.blueLight.bold("https://github.com/mdwalters/TSCPL#readme")}`));
-    console.log(chalk.whiteBright(`To learn more about libtscpl, see ${chalk.blueLight.bold("https://github.com/mdwalters/TSCPL#libtscpl")}`));
-    console.log(chalk.whiteBright(`To learn ACPL, see ${chalk.blueLight.bold("https://hackmd.io/Fzlzx3DCRSe2CB4-ABRFcQ")}`));
+    console.log(chalk.whiteBright(`To learn more, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#readme")}`));
+    console.log(chalk.whiteBright(`To learn more about libtscpl, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#libtscpl")}`));
+    console.log(chalk.whiteBright(`To learn ACPL, see ${chalk.blue.bold("https://hackmd.io/Fzlzx3DCRSe2CB4-ABRFcQ")}`));
     exit(0);
 }
 
