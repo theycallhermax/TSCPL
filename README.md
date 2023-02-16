@@ -14,7 +14,7 @@ npx tscpl [ACPL file here] --run
 ## Output files
 TSCPL compiles ACPL files to TypeScript in the file format of `[original ACPL file name].acpl.ts`. Since version 1.2.0, you can use the `--output` flag to output the compiled ACPL file to any file name you want! Please note that this doesn't change the output language. To do this, run the following command:
 ```bash
-npx tscpl [ACPL file here] --output [compiled ACPL file name here].ts
+npx tscpl [ACPL file here] --output [compiled ACPL file name here]
 ```
 # libtscpl
 Since version 1.2.0, libtscpl is the backend for TSCPL written in TypeScript. It provides TSCPL with it's core functions, such as compiling ACPL files.
