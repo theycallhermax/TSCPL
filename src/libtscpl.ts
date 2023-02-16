@@ -61,7 +61,7 @@ const prompt = readline.createInterface({
         } else if (file_split[i] === "") {
             continue;
         } else if (file_split[i].split(" ")[0] === "func") {
-            
+            fs.appendFile(output_file_name, `function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(", ")})\n`, callback);
             continue;
         } else {
             throw `Invalid statement at line ${parseInt(i) + 1}`;
