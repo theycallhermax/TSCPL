@@ -54,8 +54,8 @@ export function compile(file: string, output_file_name: string): void {
         } else if (file_split[i].split(" ")[0] === "func") {
             functions.push(file_split[i].split(" ")[1]);
 
-            for (let i in file_split[i].split(" ").slice(2, file_split[i].split(" ").length)) {
-                variables.push(file_split[i].split(" ").slice(2, file_split[i].split(" ").length)[i]);
+            for (let j in file_split[i].split(" ").slice(2, file_split[i].split(" ").length)) {
+                variables.push(file_split[i].split(" ").slice(2, file_split[i].split(" ").length)[j]);
             }
 
             fs.appendFile(output_file_name, `function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(", ")})`, callback);
