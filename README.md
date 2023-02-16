@@ -1,5 +1,5 @@
 # TSCPL
-TSCPL (**T**ype**S**cript **C**omplicated **P**rogramming **L**anguage) is a compiler inspired by ACPL. The original ACPL compiler compiles ACPL files to C, but TSCPL can compile ACPL files to TypeScript and even run ACPL files after compilation.
+TSCPL (**T**ype**S**cript **C**ompiled **P**rogramming **L**anguage) is a compiler inspired by ACPL. The original ACPL compiler compiles ACPL files to C, but TSCPL can compile ACPL files to TypeScript and even run ACPL files after compilation.
 ## Compiling and Running ACPL files
 ### Compiling
 To compile a ACPL file, you just need to run the following command:
