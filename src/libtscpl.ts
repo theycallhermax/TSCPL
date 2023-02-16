@@ -51,7 +51,7 @@ const prompt = readline.createInterface({
             continue;
         } else if (file_split[i].split("")[0] === "#") {
             continue;
-        } else if (file_split[i].split(" ")[0] === "outs") {
+        } else if (file_split[i].split(" ")[0] === "outs" || file_split[i].split(" ")[0] === "outi") {
             if (!(variables.includes(file_split[i].split(" ")[1]))) {
                 throw `Tried to print a undefined variable at line ${parseInt(i) + 1}`;
             }
@@ -60,9 +60,8 @@ const prompt = readline.createInterface({
             continue;
         } else if (file_split[i] === "") {
             continue;
-        } else if (file_split[i].split(" ")[0] === "in") {
-            fs.appendFile(output_file_name, `// @ts-ignore
-let ${file_split[i].split(" ")[1]} = prompt.question("", (input) => { ${file_split[i].split(" ")[1]} = input; prompt.close(); });`, callback);
+        } else if (file_split[i].split(" ")[0] === "func") {
+            
             continue;
         } else {
             throw `Invalid statement at line ${parseInt(i) + 1}`;
