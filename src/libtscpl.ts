@@ -74,7 +74,7 @@ const prompt = readline.createInterface({
             continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
-                fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]}();\n`, callback);
+                fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]}(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(", ")});\n`, callback);
             } else {
                 throw `Invalid statement at line ${parseInt(i) + 1}`;
             }
