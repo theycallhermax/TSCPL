@@ -64,6 +64,11 @@ const prompt = readline.createInterface({
             continue;
         } else if (file_split[i].split(" ")[0] === "func") {
             functions.push(file_split[i].split(" ")[1]);
+
+            for (let i in file_split[i].split(" ").slice(2, file_split[i].split(" ").length)) {
+                variables.push(file_split[i].split(" ").slice(2, file_split[i].split(" ").length)[i]);
+            }
+
             fs.appendFile(output_file_name, `function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(", ")})`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === ":") {
@@ -75,6 +80,9 @@ const prompt = readline.createInterface({
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
                 fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]}(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(", ")});\n`, callback);
+                continue;
+            } else if (variables.includes(file_split[i].split(" ")[0])) {
+                continue;
             } else {
                 throw `Invalid statement at line ${parseInt(i) + 1}`;
             }
