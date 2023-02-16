@@ -60,7 +60,7 @@ const prompt = readline.createInterface({
             continue;
         } else if (file_split[i] === "") {
             continue;
-        } else if (file_split[i].split("")[0] === "in") {
+        } else if (file_split[i].split(" ")[0] === "in") {
             fs.appendFile(output_file_name, "\n", callback);
             continue;
         } else {
