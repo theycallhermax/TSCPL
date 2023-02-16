@@ -5,58 +5,36 @@ import * as fs from "fs";
 import chalk from "chalk";
 import { exit } from "process";
 import { exec } from "child_process";
+import { compile } from "./libtscpl";
 
-function appendFileCallback(err): void {
-    if (err) {
-      console.error(chalk.redBright(`ERROR: ${err}`));
-      console.error(chalk.redBright(`Unsuccessfully compiled ${chalk.redBright.bold(yargs.argv._[0])}.`));
-      exit(1);
-    }
-}
+console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.0"));
 
-console.log(chalk.hex("#0077ff").bold("TSCPL v1.1.0"));
+let output_file: string = (yargs.argv.output ? yargs.argv.output : `${yargs.argv._[0]}.ts`);
 
 if (yargs.argv._[0] === undefined) {
-    console.error(chalk.redBright("ERROR: Input file is required"));
+    console.log(chalk.whiteBright("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript."));
+    console.log("");
+    console.log(chalk.whiteBright(`To learn more, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#readme")}`));
+    console.log(chalk.whiteBright(`To learn more about libtscpl, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#libtscpl")}`));
+    console.log(chalk.whiteBright(`To learn ACPL, see ${chalk.blue.bold("https://hackmd.io/Fzlzx3DCRSe2CB4-ABRFcQ")}`));
+    exit(0);
+}
+
+console.log(chalk.yellowBright(`Compiling ${chalk.yellowBright.bold(yargs.argv["_"][0])}...`));
+
+try {
+    compile(yargs.argv._[0], output_file);
+} catch(e) {
+    console.log(chalk.redBright(`${e} of ${chalk.redBright.bold(yargs.argv._[0])}`));
+    console.error(chalk.redBright(`Unsuccessfully compiled ${chalk.redBright.bold(yargs.argv._[0])}.`));
     exit(1);
 }
 
-let file: string[] = fs.readFileSync(yargs.argv._[0], "utf-8").split("\n");
-
-console.log(chalk.yellowBright(`Compiling ${chalk.yellowBright.bold(yargs.argv["_"][0])}...`));
-fs.writeFileSync(`${yargs.argv._[0]}.ts`, "");
-
-for (let i in file) {
-    if (file[i].split(" ")[0] === "outln") {
-        fs.appendFile(`${yargs.argv._[0]}.ts`, `console.log(${file[i].split(" ").slice(1, file[i].split(" ").length).join(" ")});\n`, appendFileCallback);
-        continue;
-    } else if (file[i].split(" ")[0] === "str") {
-        fs.appendFile(`${yargs.argv._[0]}.ts`, `let ${file[i].split(" ")[1]}: string = ${file[i].split(" ").slice(2, file[i].split(" ").length).join(" ")};\n`, appendFileCallback);
-        continue;
-    } else if (file[i].split(" ")[0] === "int") {
-        fs.appendFile(`${yargs.argv._[0]}.ts`, `let ${file[i].split(" ")[1]}: number = ${file[i].split(" ").slice(2, file[i].split(" ").length).join(" ")};\n`, appendFileCallback);
-        continue;
-    } else if (file[i].split("")[0] === "#") {
-        fs.appendFile(`${yargs.argv._[0]}.ts`, `//${file[i].split("").slice(1, file[i].split("").length).join("")}\n`, appendFileCallback);
-        continue;
-    } else if (file[i].split(" ")[0] === "outs") {
-        fs.appendFile(`${yargs.argv._[0]}.ts`, `console.log(${file[i].split(" ")[1]});\n`, appendFileCallback);
-        continue;
-    } else if (file[i] === "") {
-        fs.appendFile(`${yargs.argv._[0]}.ts`, "\n", appendFileCallback);
-        continue;
-    } else {
-        console.log(chalk.redBright(`ERROR: Invalid syntax at line ${parseInt(i) + 1} of ${chalk.redBright.bold(yargs.argv._[0])}`));
-        console.error(chalk.redBright(`Unsuccessfully compiled ${chalk.redBright.bold(yargs.argv._[0])}.`));
-        exit(1);
-    }
-}
-
-console.log(chalk.greenBright(`Successfully compiled ${chalk.greenBright.bold(yargs.argv._[0])} as ${chalk.greenBright.bold(`${yargs.argv._[0]}.ts`)}.`));
-console.log(chalk.yellowBright(`Running ${chalk.yellowBright.bold(`${yargs.argv._[0]}.ts`)}...`));
+console.log(chalk.greenBright(`Successfully compiled ${chalk.greenBright.bold(yargs.argv._[0])} as ${chalk.greenBright.bold(`${output_file}`)}.`));
 
 if (yargs.argv.run === true) {
-    exec(`npx ts-node ${yargs.argv._[0]}.ts`, (error, stdout, stderr) => {
+    console.log(chalk.yellowBright(`Running ${chalk.yellowBright.bold(`${output_file}`)}...`));
+    exec(`npx ts-node ${output_file}`, (error, stdout, stderr) => {
         if (error) {
             console.error(error);
             exit(1);

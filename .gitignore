@@ -108,3 +108,7 @@ dist
 
 # Compiled ACPL files
 *.acpl.ts
+
+# Replit files
+.replit
+replit.nix
