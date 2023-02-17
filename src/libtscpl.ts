@@ -14,12 +14,24 @@ export function compile(file: string, output_file_name: string): void {
     let file_split: string[] = fs.readFileSync(file, "utf-8").split("\n");
     let variables: string[] = [];
     let functions: string[] = [];
-    let is_package: boolean = false;
+    let is_module: boolean = false;
 
     fs.writeFileSync(output_file_name, "");
 
     if (file_split[0] === "module") {
-        is_package = true;
+        is_module = true;
+    }
+
+    for (let i in file_split) {
+        if (file_split[i].split(" ")[0] === "import") {
+            let import_file: string[] = fs.readFileSync(file_split[i].split(" ")[1], "utf-8");
+
+            for (let j in import_file) {
+                if (import_file[j].split(" ")[0] === "func") {
+                    functions.push(import_file[j].split(" ")[1]);
+                }
+            }
+        }
     }
 
     for (let i in file_split) {
@@ -80,7 +92,7 @@ export function compile(file: string, output_file_name: string): void {
             compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1]}.ts`);
             fs.appendFile(output_file_name, `import "./${file_split[i].split(" ")[1]}"\n`, callback);
             continue;
-        } /* else {
+        } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
                 fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]}(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")});\n`, callback);
                 continue;
@@ -89,6 +101,6 @@ export function compile(file: string, output_file_name: string): void {
             } else {
                 throw `Invalid statement at line ${parseInt(i) + 1}`;
             }
-        } */
+        }
     }
 }
