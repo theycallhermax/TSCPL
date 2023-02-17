@@ -9,7 +9,7 @@ import { compile } from "./libtscpl";
 
 console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.0"));
 
-let output_file: string = (yargs.argv.output ? yargs.argv.output : `${yargs.argv._[0]}.ts`);
+let output_file: string = (yargs.argv.output ? yargs.argv.output : `${yargs.argv._[0].split(".acpl")[0]}.ts`);
 
 if (yargs.argv._[0] === undefined) {
     console.log(chalk.whiteBright("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript."));
