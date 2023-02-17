@@ -94,6 +94,38 @@ export function compile(file: string, output_file_name: string): void {
             compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1].split(".acpl")[0]}.ts`);
             fs.appendFile(output_file_name, `import {${imports.join(", ")}} from "./${file_split[i].split(" ")[1].split(".acpl")[0]}";\n`, callback);
             continue;
+        } else if (file_split[i].split(" ")[0] === "on") {
+            fs.appendFile(output_file_name, `if (${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")})`, callback);
+            continue;
+        } else if (file_split[i].split(" ")[0] === "on") {
+            let args: string[] = file_split[i].split(" ").slice(1, file_split[i].split(" ").length);
+
+            for (let j in args) {
+                if (args[j] === "=") {
+                    args[j] = "==";
+                } else if (args[j] === "==") {
+                    args[j] = "===";
+                }
+            } 
+
+            fs.appendFile(output_file_name, `if (${args.join(" ")})`, callback);
+            continue;
+        } else if (file_split[i].split(" ")[0] === "or") {
+            let args: string[] = file_split[i].split(" ").slice(1, file_split[i].split(" ").length);
+
+            for (let j in args) {
+                if (args[j] === "=") {
+                    args[j] = "==";
+                } else if (args[j] === "==") {
+                    args[j] = "===";
+                }
+            } 
+
+            fs.appendFile(output_file_name, `else if (${args.join(" ")})`, callback);
+            continue;
+        } else if (file_split[i].split(" ")[0] === "!on") {
+            fs.appendFile(output_file_name, `else`, callback);
+            continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
                 fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]}(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")});\n`, callback);
