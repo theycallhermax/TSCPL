@@ -15,6 +15,7 @@ export function compile(file: string, output_file_name: string): void {
     let variables: string[] = [];
     let functions: string[] = [];
     let is_module: boolean = false;
+    let imports: string[] = [];
 
     fs.writeFileSync(output_file_name, "");
 
@@ -29,6 +30,7 @@ export function compile(file: string, output_file_name: string): void {
             for (let j in import_file) {
                 if (import_file[j].split(" ")[0] === "func") {
                     functions.push(import_file[j].split(" ")[1]);
+                    imports.push(import_file[j].split(" ")[1]);
                 }
             }
         }
@@ -90,7 +92,7 @@ export function compile(file: string, output_file_name: string): void {
             continue;
         } else if (file_split[i].split(" ")[0] === "import") {
             compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1]}.ts`);
-            fs.appendFile(output_file_name, `import "./${file_split[i].split(" ")[1]}";\n`, callback);
+            fs.appendFile(output_file_name, `import { ${imports.join(", ")} } "./${file_split[i].split(" ")[1]}";\n`, callback);
             continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
