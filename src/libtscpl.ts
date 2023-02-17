@@ -80,7 +80,7 @@ export function compile(file: string, output_file_name: string): void {
             compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1]}.ts`);
             fs.appendFile(output_file_name, `import "./${file_split[i].split(" ")[1]}"\n`, callback);
             continue;
-        } else {
+        } /* else {
             if (functions.includes(file_split[i].split(" ")[0])) {
                 fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]}(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")});\n`, callback);
                 continue;
@@ -89,6 +89,6 @@ export function compile(file: string, output_file_name: string): void {
             } else {
                 throw `Invalid statement at line ${parseInt(i) + 1}`;
             }
-        }
+        } */
     }
 }
