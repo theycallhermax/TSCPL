@@ -90,7 +90,7 @@ export function compile(file: string, output_file_name: string): void {
             continue;
         } else if (file_split[i].split(" ")[0] === "import") {
             compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1]}.ts`);
-            fs.appendFile(output_file_name, `import "./${file_split[i].split(" ")[1]}"\n`, callback);
+            fs.appendFile(output_file_name, `import "./${file_split[i].split(" ")[1]}";\n`, callback);
             continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
