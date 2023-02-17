@@ -95,9 +95,6 @@ export function compile(file: string, output_file_name: string): void {
             fs.appendFile(output_file_name, `import {${imports.join(", ")}} from "./${file_split[i].split(" ")[1].split(".acpl")[0]}";\n`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "on") {
-            fs.appendFile(output_file_name, `if (${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")})`, callback);
-            continue;
-        } else if (file_split[i].split(" ")[0] === "on") {
             let args: string[] = file_split[i].split(" ").slice(1, file_split[i].split(" ").length);
 
             for (let j in args) {
