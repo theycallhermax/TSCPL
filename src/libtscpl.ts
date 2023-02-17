@@ -12,11 +12,15 @@ function callback(): void {
 */
 export function compile(file: string, output_file_name: string): void {
     let file_split: string[] = fs.readFileSync(file, "utf-8").split("\n");
-
     let variables: string[] = [];
     let functions: string[] = [];
+    let is_package: boolean = false;
 
     fs.writeFileSync(output_file_name, "");
+
+    if (file_split[0].split(" ")[0] === "package") {
+        is_package = true;
+    }
 
     for (let i in file_split) {
         if (file_split[i].split(" ")[0] === "outln") {
@@ -58,13 +62,25 @@ export function compile(file: string, output_file_name: string): void {
                 variables.push(file_split[i].split(" ").slice(2, file_split[i].split(" ").length)[j]);
             }
 
-            fs.appendFile(output_file_name, `function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(": any, ")}: any)`, callback);
+            if (is_package) {
+                if (file_split[i].split(" ")[1].startsWith("_")) {
+                    fs.appendFile(output_file_name, `function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(": any, ")}: any)`, callback);
+                } else {
+                    fs.appendFile(output_file_name, `export function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(": any, ")}: any)`, callback);
+                }
+            } else {
+                fs.appendFile(output_file_name, `function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(": any, ")}: any)`, callback);
+            }
             continue;
         } else if (file_split[i].split(" ")[0] === ":") {
             fs.appendFile(output_file_name, ` {\n`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === ";") {
             fs.appendFile(output_file_name, `}\n`, callback);
+            continue;
+        } else if (file_split[i].split(" ")[0] === "import") {
+            compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1]}.ts`);
+            fs.appendFile(output_file_name, `import "${file_split[i].split(" ")[1]}.ts"\n`, callback);
             continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
