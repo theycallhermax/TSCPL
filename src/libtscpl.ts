@@ -72,7 +72,7 @@ export function compile(file: string, output_file_name: string): void {
                 variables.push(file_split[i].split(" ").slice(2, file_split[i].split(" ").length)[j]);
             }
 
-            if (is_package) {
+            if (is_module) {
                 if (file_split[i].split(" ")[1].startsWith("_")) {
                     fs.appendFile(output_file_name, `function ${file_split[i].split(" ")[1]}(${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(": any, ")}: any)`, callback);
                 } else {
