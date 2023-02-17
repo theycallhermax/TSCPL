@@ -24,7 +24,7 @@ export function compile(file: string, output_file_name: string): void {
 
     for (let i in file_split) {
         if (file_split[i].split(" ")[0] === "import") {
-            let import_file: string[] = fs.readFileSync(file_split[i].split(" ")[1], "utf-8");
+            let import_file: string[] = fs.readFileSync(file_split[i].split(" ")[1], "utf-8").split("\n");
 
             for (let j in import_file) {
                 if (import_file[j].split(" ")[0] === "func") {
