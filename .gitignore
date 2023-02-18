@@ -106,9 +106,6 @@ dist
 # ACPL files
 *.acpl
 
-# Compiled ACPL files
-*.acpl.ts
-
 # Replit files
 .replit
 replit.nix
