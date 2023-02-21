@@ -24,6 +24,15 @@ export function compile(file: string, output_file_name: string): void {
     }
 
     for (let i in file_split) {
+        if (file_split[i].split(" ")[0] === "in") {
+            fs.appendFile(output_file_name, `import * as readline from "node:readline";
+import {stdin, stdout} from "node:process";
+const rl = readline.createInterface({stdin, stdout});`, callback);
+            break;
+        }
+    }
+
+    for (let i in file_split) {
         if (file_split[i].split(" ")[0] === "import") {
             let import_file: string[] = fs.readFileSync(file_split[i].split(" ")[1], "utf-8").split("\n");
 
@@ -121,7 +130,13 @@ export function compile(file: string, output_file_name: string): void {
             fs.appendFile(output_file_name, `else if (${args.join(" ")})`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "!on") {
-            fs.appendFile(output_file_name, `else`, callback);
+            fs.appendFile(output_file_name, "else", callback);
+            continue;
+        } else if (file_split[i].split(" ")[0] === "in") {
+            fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: string;
+rl.question("", (answer) => {
+    ${file_split[i].split(" ")[1]} = answer;
+});`, callback);
             continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
