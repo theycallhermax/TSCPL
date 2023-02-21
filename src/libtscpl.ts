@@ -27,7 +27,7 @@ export function compile(file: string, output_file_name: string): void {
         if (file_split[i].split(" ")[0] === "in") {
             fs.appendFile(output_file_name, `import * as readline from "node:readline";
 import {stdin, stdout} from "node:process";
-const rl = readline.createInterface({stdin, stdout});`, callback);
+const rl = readline.createInterface({stdin, stdout});\n`, callback);
             break;
         }
     }
@@ -136,7 +136,7 @@ const rl = readline.createInterface({stdin, stdout});`, callback);
             fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: string;
 rl.question("", (answer) => {
     ${file_split[i].split(" ")[1]} = answer;
-});`, callback);
+});\n`, callback);
             continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
