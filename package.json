@@ -1,6 +1,6 @@
 {
   "name": "tscpl",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Port of @RJmsG's ACPL to TypeScript",
   "bin": "./src/index.ts",
   "scripts": {},
