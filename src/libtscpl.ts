@@ -131,10 +131,6 @@ export function compile(file: string, output_file_name: string): void {
             fs.appendFile(output_file_name, "else", callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "exit") {
-            if (parseInt(file_split[i].split(" ")[1]).isNan()) {
-                throw `The exit code must be a number at line ${parseInt(i) + 1}`;
-            }
-
             fs.appendFile(output_file_name, `exit(${file_split[i].split(" ")[1]});\n`, callback);
             continue;
         } else {
