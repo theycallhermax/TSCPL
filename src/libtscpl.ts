@@ -132,17 +132,12 @@ const rl = readline.createInterface({stdin, stdout});\n`, callback);
         } else if (file_split[i].split(" ")[0] === "!on") {
             fs.appendFile(output_file_name, "else", callback);
             continue;
-        } else if (file_split[i].split(" ")[0] === "in") {
-            fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: string;
-rl.question("", (answer) => {
-    ${file_split[i].split(" ")[1]} = answer;
-});\n`, callback);
-            continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
                 fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]}(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")});\n`, callback);
                 continue;
-            } else if (variables.includes(file_split[i].split(" ")[0])) {
+            } else if (variables.includes(file_split[i].split(" ")[0]) && file_split[i].split(" ")[1]) {
+                fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]} = ${file_split[i].split(" ")[1]};\n`, callback);
                 continue;
             } else {
                 throw `Invalid statement at line ${parseInt(i) + 1}`;
