@@ -2,8 +2,10 @@
   "name": "tscpl",
   "version": "1.2.3",
   "description": "Port of @RJmsG's ACPL to TypeScript",
-  "bin": "./src/index.ts",
-  "scripts": {},
+  "bin": "./src/index.js",
+  "scripts": {
+      "prepare": "tsc"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mdwalters/TSCPL.git"
