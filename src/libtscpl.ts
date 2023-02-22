@@ -24,10 +24,8 @@ export function compile(file: string, output_file_name: string): void {
     }
 
     for (let i in file_split) {
-        if (file_split[i].split(" ")[0] === "in") {
-            fs.appendFile(output_file_name, `import * as readline from "node:readline";
-import {stdin, stdout} from "node:process";
-const rl = readline.createInterface({stdin, stdout});\n`, callback);
+        if (file_split[i].split(" ")[0] === "exit") {
+            fs.appendFile(output_file_name, `import {exit} from "process";\n`, callback);
             break;
         }
     }
@@ -131,6 +129,13 @@ const rl = readline.createInterface({stdin, stdout});\n`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "!on") {
             fs.appendFile(output_file_name, "else", callback);
+            continue;
+        } else if (file_split[i].split(" ")[0] === "exit") {
+            if (parseInt(file_split[i].split(" ")[1]) === NaN) {
+                throw `The exit code must be a number at line ${parseInt(i) + 1}`;
+            }
+
+            fs.appendFile(output_file_name, `exit(${file_split[i].split(" ")[1]});\n`, callback);
             continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
