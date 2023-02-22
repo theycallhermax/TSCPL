@@ -1,4 +1,4 @@
-#!/usr/bin/env -S npx ts-node
+#!/usr/bin/env node
 // @ts-nocheck
 import * as yargs from "yargs";
 import * as fs from "fs";
@@ -7,7 +7,7 @@ import { exit } from "process";
 import { exec } from "child_process";
 import { compile } from "./libtscpl";
 
-console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.0"));
+console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.3"));
 
 if (yargs.argv._[0] === undefined) {
     console.log(chalk.whiteBright("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript."));
