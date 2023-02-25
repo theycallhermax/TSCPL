@@ -109,3 +109,6 @@ dist
 # Replit files
 .replit
 replit.nix
+
+# JavaScript files
+*.js

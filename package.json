@@ -4,7 +4,7 @@
   "description": "Port of @RJmsG's ACPL to TypeScript",
   "bin": "./src/index.js",
   "scripts": {
-      "prepare": "tsc"
+    "prepare": "tsc"
   },
   "repository": {
     "type": "git",
