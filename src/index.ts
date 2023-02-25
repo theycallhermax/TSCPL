@@ -20,7 +20,7 @@ if (yargs.argv._[0] === undefined) {
 
 let output_file: string = (yargs.argv.output ? yargs.argv.output : `${yargs.argv._[0].split(".acpl")[0]}.ts`);
 
-console.log(chalk.yellowBright(`Compiling ${chalk.yellowBright.bold(yargs.argv["_"][0])}...`));
+console.log(chalk.yellow(`Compiling ${chalk.yellowBright.bold(yargs.argv["_"][0])}...`));
 
 try {
     compile(yargs.argv._[0], output_file);
@@ -30,10 +30,10 @@ try {
     exit(1);
 }
 
-console.log(chalk.greenBright(`Successfully compiled ${chalk.greenBright.bold(yargs.argv._[0])} as ${chalk.greenBright.bold(`${output_file}`)}.`));
+console.log(chalk.green(`Successfully compiled ${chalk.greenBright.bold(yargs.argv._[0])} as ${chalk.greenBright.bold(`${output_file}`)}.`));
 
 if (yargs.argv.run === true) {
-    console.log(chalk.yellowBright(`Running ${chalk.yellowBright.bold(`${output_file}`)}...`));
+    console.log(chalk.yellow(`Running ${chalk.yellowBright.bold(`${output_file}`)}...`));
     exec(`npx ts-node ${output_file}`, (error, stdout, stderr) => {
         if (error) {
             console.error(error);
