@@ -12,3 +12,6 @@ replit.nix
 .cache/
 .config/
 .upm/
+
+# ACPL files
+*.acpl
