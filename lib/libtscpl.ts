@@ -7,8 +7,8 @@ function callback(): void {
 /**
 * Compiles a ACPL file
 *
-* @param file The ACPL file to compile
-* @param output_file_name The name of the output file
+* @param {string} file The ACPL file to compile
+* @param {string} output_file_name The name of the output file
 */
 export function compile(file: string, output_file_name: string): void {
     let file_split: string[] = fs.readFileSync(file, "utf-8").split("\n");
