@@ -10,12 +10,14 @@ import { compile } from "./../lib/libtscpl";
 console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.3"));
 
 if (yargs.argv._[0] === undefined) {
-    console.log(chalk.whiteBright("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript."));
+    console.log("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript.");
     console.log("");
-    console.log(chalk.whiteBright(`To learn more, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#readme")}`));
-    console.log(chalk.whiteBright(`To learn more about libtscpl, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#libtscpl")}`));
-    console.log(chalk.whiteBright(`To learn ACPL, see ${chalk.blue.bold("https://hackmd.io/@mdwalters/acpl")}`));
-    exit(0);
+    console.log(`To learn more, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#readme")}`);
+    console.log(`To learn more about libtscpl, see ${chalk.blue.bold("https://github.com/mdwalters/TSCPL#libtscpl")}`);
+    console.log(`To learn ACPL, see ${chalk.blue.bold("https://hackmd.io/@mdwalters/acpl")}`);
+    console.log("");
+    console.log(`Found a bug, or have a feature suggestion? Create a new issue at ${chalk.blue.bold("https://github.com/mdwalters/TSCPL/issues/new")}`);
+    exit(1);
 }
 
 let output_file: string = (yargs.argv.output ? yargs.argv.output : `${yargs.argv._[0].split(".acpl")[0]}.ts`);
