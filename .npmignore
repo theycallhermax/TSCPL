@@ -1,2 +1,14 @@
 # TypeScript files
 *.ts
+
+# Replit files
+.replit
+replit.nix
+
+# GitHub folder
+.github/
+
+# Odd stuff Replit put here
+.cache/
+.config/
+.upm/
