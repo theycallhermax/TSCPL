@@ -2,6 +2,7 @@
   "name": "tscpl",
   "version": "1.2.4",
   "description": "Port of @RJmsG's ACPL to TypeScript",
+  "main": "./lib/libtscpl.js",
   "bin": "./src/index.js",
   "scripts": {
     "prepare": "tsc"
