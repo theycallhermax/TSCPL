@@ -133,6 +133,8 @@ export function compile(file: string, output_file_name: string): void {
         } else if (file_split[i].split(" ")[0] === "exit") {
             fs.appendFile(output_file_name, `exit(${file_split[i].split(" ")[1]});\n`, callback);
             continue;
+        } else if (file_split[i] === "" || file_split[i] === "module") {
+            continue;
         } else {
             if (functions.includes(file_split[i].split(" ")[0])) {
                 fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]}(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")});\n`, callback);
