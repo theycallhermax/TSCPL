@@ -7,7 +7,7 @@ import { exit } from "process";
 import { exec } from "child_process";
 import { compile } from "./../lib/libtscpl";
 
-console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.3"));
+console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.5"));
 
 if (yargs.argv._[0] === undefined) {
     console.log("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript.");
