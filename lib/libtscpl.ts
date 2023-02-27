@@ -65,8 +65,8 @@ export function compile(file: string, output_file_name: string): void {
                 fs.appendFile(output_file_name, `let ${file_split[i].split(" ")[1]}: number = ${file_split[i].split(" ").slice(2, file_split[i].split(" ").length).join(" ")};\n`, callback);
             }
             continue;
-        } else if (file_split[i].split("")[0] === "#" || file_split[i] === "" || file_split[i] === "module") {
-            continue;
+        } else if (file_split[i].split("")[0] === "#") {
+            fs.appendFile(output_file_name, `//${file_split[i].split("").slice(1, file_split[i].split("").length)}`, callback);
         } else if (file_split[i].split(" ")[0] === "outs" || file_split[i].split(" ")[0] === "outi") {
             if (!(variables.includes(file_split[i].split(" ")[1]))) {
                 throw `Tried to print a undefined variable at line ${parseInt(i) + 1}`;
