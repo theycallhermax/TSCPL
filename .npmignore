@@ -8,7 +8,7 @@ replit.nix
 # GitHub folder
 .github/
 
-# Odd stuff Replit put here
+# Weird stuff Replit put here
 .cache/
 .config/
 .upm/

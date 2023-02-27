@@ -1,30 +1,30 @@
 {
-  "name": "tscpl",
-  "version": "1.2.5",
-  "description": "Port of @RJmsG's ACPL to TypeScript",
-  "main": "./lib/libtscpl.js",
-  "type": "module",
-  "bin": "./src/index.js",
-  "scripts": {
-    "prepare": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mdwalters/TSCPL.git"
-  },
-  "author": "M.D. Walters",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mdwalters/TSCPL/issues"
-  },
-  "homepage": "https://github.com/mdwalters/TSCPL#readme",
-  "devDependencies": {
-    "@types/node": "^18.13.0",
-    "@types/yargs": "^17.0.22",
-    "typescript": "^4.9.5"
-  },
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "yargs": "^17.7.0"
-  }
+    "name": "tscpl",
+    "version": "1.2.5",
+    "description": "Port of @RJmsG's ACPL to TypeScript",
+    "main": "./lib/libtscpl.js",
+    "type": "module",
+    "bin": "./src/index.js",
+    "scripts": {
+        "prepare": "tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mdwalters/TSCPL.git"
+    },
+    "author": "M.D. Walters",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mdwalters/TSCPL/issues"
+    },
+    "homepage": "https://github.com/mdwalters/TSCPL#readme",
+    "devDependencies": {
+        "@types/node": "^18.13.0",
+        "@types/yargs": "^17.0.22",
+        "typescript": "^4.9.5"
+    },
+    "dependencies": {
+        "chalk": "^4.1.2",
+        "yargs": "^17.7.0"
+    }
 }
