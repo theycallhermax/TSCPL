@@ -20,7 +20,7 @@ if (yargs.argv._[0] === undefined) {
     exit(1);
 }
 
-let output_file: string = (yargs.argv.output ? yargs.argv.output : `${yargs.argv._[0].split(".acpl")[0]}.ts`);
+const output_file: string = (yargs.argv.output ? yargs.argv.output : `${yargs.argv._[0].split(".acpl")[0]}.ts`);
 
 console.log(chalk.yellow(`Compiling ${chalk.yellowBright.bold(yargs.argv["_"][0])}...`));
 

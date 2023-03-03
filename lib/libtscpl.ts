@@ -11,11 +11,11 @@ function callback(): void {
 * @param {string} output_file_name The name of the output file
 */
 export function compile(file: string, output_file_name: string): void {
-    let file_split: string[] = fs.readFileSync(file, "utf-8").split("\n");
-    let variables: string[] = [];
-    let functions: string[] = [];
-    let is_module: boolean = false;
-    let imports: string[] = [];
+    const file_split: string[] = fs.readFileSync(file, "utf-8").split("\n");
+    const variables: string[] = [];
+    const functions: string[] = [];
+    let is_module = false;
+    const imports: string[] = [];
 
     fs.writeFileSync(output_file_name, "");
 
@@ -23,18 +23,18 @@ export function compile(file: string, output_file_name: string): void {
         is_module = true;
     }
 
-    for (let i in file_split) {
+    for (const i in file_split) {
         if (file_split[i].split(" ")[0] === "exit") {
-            fs.appendFile(output_file_name, `import {exit} from "process";\n`, callback);
+            fs.appendFile(output_file_name, "import {exit} from \"process\";\n", callback);
             break;
         }
     }
 
-    for (let i in file_split) {
+    for (const i in file_split) {
         if (file_split[i].split(" ")[0] === "import") {
-            let import_file: string[] = fs.readFileSync(file_split[i].split(" ")[1], "utf-8").split("\n");
+            const import_file: string[] = fs.readFileSync(file_split[i].split(" ")[1], "utf-8").split("\n");
 
-            for (let j in import_file) {
+            for (const j in import_file) {
                 if (import_file[j].split(" ")[0] === "func") {
                     functions.push(import_file[j].split(" ")[1]);
                     imports.push(import_file[j].split(" ")[1]);
@@ -43,7 +43,7 @@ export function compile(file: string, output_file_name: string): void {
         }
     }
 
-    for (let i in file_split) {
+    for (const i in file_split) {
         if (file_split[i].split(" ")[0] === "outln") {
             fs.appendFile(output_file_name, `console.log(${file_split[i].split(" ").slice(1, file_split[i].split(" ").length).join(" ")});\n`, callback);
             continue;
@@ -77,7 +77,7 @@ export function compile(file: string, output_file_name: string): void {
         } else if (file_split[i].split(" ")[0] === "func") {
             functions.push(file_split[i].split(" ")[1]);
 
-            for (let j in file_split[i].split(" ").slice(2, file_split[i].split(" ").length)) {
+            for (const j in file_split[i].split(" ").slice(2, file_split[i].split(" ").length)) {
                 variables.push(file_split[i].split(" ").slice(2, file_split[i].split(" ").length)[j]);
             }
 
@@ -92,19 +92,19 @@ export function compile(file: string, output_file_name: string): void {
             }
             continue;
         } else if (file_split[i].split(" ")[0] === ":") {
-            fs.appendFile(output_file_name, ` {\n`, callback);
+            fs.appendFile(output_file_name, " {\n", callback);
             continue;
         } else if (file_split[i].split(" ")[0] === ";") {
-            fs.appendFile(output_file_name, `}\n`, callback);
+            fs.appendFile(output_file_name, "}\n", callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "import") {
             compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1].split(".acpl")[0]}.ts`);
             fs.appendFile(output_file_name, `import {${imports.join(", ")}} from "./${file_split[i].split(" ")[1].split(".acpl")[0]}";\n`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "on") {
-            let args: string[] = file_split[i].split(" ").slice(1, file_split[i].split(" ").length);
+            const args: string[] = file_split[i].split(" ").slice(1, file_split[i].split(" ").length);
 
-            for (let j in args) {
+            for (const j in args) {
                 if (args[j] === "=") {
                     args[j] = "==";
                 } else if (args[j] === "==") {
@@ -115,9 +115,9 @@ export function compile(file: string, output_file_name: string): void {
             fs.appendFile(output_file_name, `if (${args.join(" ")})`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "or") {
-            let args: string[] = file_split[i].split(" ").slice(1, file_split[i].split(" ").length);
+            const args: string[] = file_split[i].split(" ").slice(1, file_split[i].split(" ").length);
 
-            for (let j in args) {
+            for (const j in args) {
                 if (args[j] === "=") {
                     args[j] = "==";
                 } else if (args[j] === "==") {
