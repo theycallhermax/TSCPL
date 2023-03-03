@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 // @ts-nocheck
 import * as yargs from "yargs";
-import * as fs from "fs";
 import chalk from "chalk";
 import { exit } from "process";
 import { exec } from "child_process";
