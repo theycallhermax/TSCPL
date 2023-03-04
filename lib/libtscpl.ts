@@ -9,6 +9,7 @@ function callback(): void {
 *
 * @param {string} file The ACPL file to compile
 * @param {string} output_file_name The name of the output file
+* @returns {void} Nothing
 */
 export function compile(file: string, output_file_name: string): void {
     const file_split: string[] = fs.readFileSync(file, "utf-8").split("\n");
@@ -25,7 +26,7 @@ export function compile(file: string, output_file_name: string): void {
 
     for (const i in file_split) {
         if (file_split[i].split(" ")[0] === "exit") {
-            fs.appendFile(output_file_name, "import {exit} from \"process\";\n", callback);
+            fs.appendFile(output_file_name, "import {exit} from \"node:process\";\n", callback);
             break;
         }
     }

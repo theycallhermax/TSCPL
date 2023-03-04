@@ -33,7 +33,7 @@ try {
 
 console.log(chalk.green(`Successfully compiled ${chalk.greenBright.bold(yargs.argv._[0])} as ${chalk.greenBright.bold(`${output_file}`)}.`));
 
-if (yargs.argv.run === true) {
+if (yargs.argv.run) {
     console.log(chalk.yellow(`Running ${chalk.yellowBright.bold(`${output_file}`)}...`));
     exec(`npx ts-node ${output_file}`, (error, stdout, stderr) => {
         if (error) {
