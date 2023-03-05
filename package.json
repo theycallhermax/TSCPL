@@ -6,7 +6,7 @@
     "type": "module",
     "bin": "./src/index.js",
     "scripts": {
-        "prepare": "npm run lint && tsc",
+        "prepare": "tsc",
         "lint": "eslint ."
     },
     "repository": {
