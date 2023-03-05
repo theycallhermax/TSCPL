@@ -144,7 +144,7 @@ export function compile(file: string, output_file_name: string): void {
                 fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]} = ${file_split[i].split(" ")[1]};\n`, callback);
                 continue;
             } else {
-                throw `Invalid statement at line ${parseInt(i) + 1}`;
+                throw `Invalid statement at line ${parseInt(i) + 1}\t${file_split[i]}`;
             }
         }
     }
