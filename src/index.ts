@@ -8,6 +8,7 @@ import { exec } from "child_process";
 import { compile } from "./../lib/libtscpl.js";
 
 const argv: object = yargs(hideBin(process.argv))
+    .version(false)
     .option("run", {
         alias: "r",
         type: "string",
@@ -24,11 +25,16 @@ const argv: object = yargs(hideBin(process.argv))
     })
     .option("version", {
         alias: "v",
+        type: "string",
         describe: "Shows the version of TSCPL"
     })
     .argv;
 
 console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.6"));
+
+if (argv.version || argv.v) {
+    exit(0);
+}
 
 if (argv._[0] === undefined) {
     console.log("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript.");
@@ -38,6 +44,8 @@ if (argv._[0] === undefined) {
     console.log(`To learn ACPL, see ${chalk.blue.bold("https://hackmd.io/@mdwalters/acpl")}`);
     console.log("");
     console.log(`Found a bug, or have a feature suggestion? Create a new issue at ${chalk.blue.bold("https://github.com/mdwalters/TSCPL/issues/new")}`);
+    console.log("");
+    console.log(`To see a list of options, pass ${chalk.bold("--help")}`);
     exit(1);
 }
 
