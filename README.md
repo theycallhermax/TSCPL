@@ -30,12 +30,9 @@ outln "Hello from libtscpl!"
 ```ts
 // index.ts
 import { compile } from "tscpl";
-import * as fs from "fs";
-
-let acpl: string = fs.readFileSync("main.acpl", "utf-8");
 
 try {
-    compile(acpl, "main.acpl.ts");
+    compile("main.acpl", "main.acpl.ts");
 } catch(e) {
     console.error(e);
 }
