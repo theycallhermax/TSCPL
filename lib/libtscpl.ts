@@ -25,13 +25,6 @@ export function compile(file: string, output_file_name: string): void {
     }
 
     for (const i in file_split) {
-        if (file_split[i].split(" ")[0] === "exit") {
-            fs.appendFile(output_file_name, "import {exit} from \"node:process\";\n", callback);
-            break;
-        }
-    }
-
-    for (const i in file_split) {
         if (file_split[i].split(" ")[0] === "import") {
             const import_file: string[] = fs.readFileSync(file_split[i].split(" ")[1], "utf-8").split("\n");
 
@@ -132,7 +125,7 @@ export function compile(file: string, output_file_name: string): void {
             fs.appendFile(output_file_name, "else", callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "exit") {
-            fs.appendFile(output_file_name, `exit(${file_split[i].split(" ")[1]});\n`, callback);
+            fs.appendFile(output_file_name, `process.exit(${file_split[i].split(" ")[1]});\n`, callback);
             continue;
         } else if (file_split[i] === "" || file_split[i] === "module") {
             continue;
