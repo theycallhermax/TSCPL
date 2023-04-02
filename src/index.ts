@@ -65,7 +65,7 @@ console.log(chalk.green(`Successfully compiled ${chalk.greenBright.bold(argv._[0
 
 if (argv.run || argv.r) {
     console.log(chalk.yellow(`Running ${chalk.yellowBright.bold(`${output_file}`)}...`));
-    exec("tsc", (error, stdout, stderr) => {
+    exec(`npx tsc --module esnext --target esnext ${argv._[0].split(".acpl")[0]}.ts`, (error, stdout, stderr) => {
         if (error) {
             console.error(error);
             exit(1);
