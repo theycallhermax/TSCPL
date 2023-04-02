@@ -5,7 +5,7 @@ import { hideBin } from "yargs/helpers";
 import chalk from "chalk";
 import { exit } from "process";
 import { exec } from "child_process";
-import { compile } from "./../lib/libtscpl.js";
+import { compile } from "../lib/libtscpl.js";
 
 const argv: object = yargs(hideBin(process.argv))
     .version(false)
