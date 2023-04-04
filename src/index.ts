@@ -33,6 +33,7 @@ const argv: object = yargs(hideBin(process.argv))
 console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.6"));
 
 if (argv.version || argv.v) {
+    console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.6"));
     exit(0);
 }
 
@@ -54,7 +55,9 @@ const output_file: string = (argv.output || argv.o ? argv.output || argv.o : `${
 console.log(chalk.yellow(`Compiling ${chalk.yellowBright.bold(argv._[0])}...`));
 
 try {
-    compile(argv._[0], output_file);
+    compile(argv._[0], output_file, {
+        ignore_errors: argv.ignore || argv.i
+    });
 } catch(e) {
     console.log(chalk.red(`${e} of ${chalk.red.bold(argv._[0])}`));
     console.error(chalk.red(`Unsuccessfully compiled ${chalk.red.bold(argv._[0])}.`));

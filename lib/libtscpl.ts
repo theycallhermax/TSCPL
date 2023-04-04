@@ -11,7 +11,7 @@ function callback(): void {
 * @param {string} output_file_name The name of the output file
 * @returns {void} Nothing
 */
-export function compile(file: string, output_file_name: string): void {
+export function compile(file: string, output_file_name: string, options): void {
     const file_split: string[] = fs.readFileSync(file, "utf-8").split("\n");
     const variables: string[] = [];
     const functions: string[] = [];
@@ -62,7 +62,7 @@ export function compile(file: string, output_file_name: string): void {
         } else if (file_split[i].split("")[0] === "#") {
             fs.appendFile(output_file_name, `//${file_split[i].split("").slice(1, file_split[i].split("").length)}`, callback);
         } else if (file_split[i].split(" ")[0] === "outs" || file_split[i].split(" ")[0] === "outi") {
-            if (!(variables.includes(file_split[i].split(" ")[1]))) {
+            if (!variables.includes(file_split[i].split(" ")[1]) && !options.ignore_errors) {
                 throw `Tried to print a undefined variable at line ${parseInt(i) + 1}`;
             }
 
@@ -93,7 +93,7 @@ export function compile(file: string, output_file_name: string): void {
             continue;
         } else if (file_split[i].split(" ")[0] === "import") {
             compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1].split(".acpl")[0]}.ts`);
-            fs.appendFile(output_file_name, `import {${imports.join(", ")}} from "./${file_split[i].split(" ")[1].split(".acpl")[0]}";\n`, callback);
+            fs.appendFile(output_file_name, `import {${imports.join(", ")}} from "${file_split[i].split(" ")[1].split(".acpl")[0]}";\n`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "on") {
             const args: string[] = file_split[i].split(" ").slice(1, file_split[i].split(" ").length);
@@ -137,7 +137,7 @@ export function compile(file: string, output_file_name: string): void {
                 fs.appendFile(output_file_name, `${file_split[i].split(" ")[0]} = ${file_split[i].split(" ")[1]};\n`, callback);
                 continue;
             } else {
-                throw `Invalid statement at line ${parseInt(i) + 1}`;
+                if (!options.ignore_errors) throw `Invalid statement at line ${parseInt(i) + 1}`;
             }
         }
     }
