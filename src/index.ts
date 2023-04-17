@@ -30,10 +30,8 @@ const argv: object = yargs(hideBin(process.argv))
     })
     .argv;
 
-console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.6"));
-
 if (argv.version || argv.v) {
-    console.log(chalk.hex("#0077ff").bold("TSCPL v1.2.6"));
+    console.log("2023.04.17");
     exit(0);
 }
 
