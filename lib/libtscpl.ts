@@ -93,7 +93,7 @@ export function compile(file: string, output_file_name: string, options: options
             fs.appendFile(output_file_name, "}\n", callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "import") {
-            compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1].split(".acpl")[0]}.ts`);
+            compile(file_split[i].split(" ")[1], `${file_split[i].split(" ")[1].split(".acpl")[0]}.ts`, options);
             fs.appendFile(output_file_name, `import {${imports.join(", ")}} from "${file_split[i].split(" ")[1].split(".acpl")[0]}";\n`, callback);
             continue;
         } else if (file_split[i].split(" ")[0] === "on") {
