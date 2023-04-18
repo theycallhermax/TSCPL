@@ -1,4 +1,5 @@
 import * as fs from "node:fs";
+import { options } from "./interfaces";
 
 function callback(): void {
     return;
@@ -11,7 +12,7 @@ function callback(): void {
 * @param {string} output_file_name The name of the output file
 * @returns {void} Nothing
 */
-export function compile(file: string, output_file_name: string, options): void {
+export function compile(file: string, output_file_name: string, options: options): void {
     const file_split: string[] = fs.readFileSync(file, "utf-8").split("\n");
     const variables: string[] = [];
     const functions: string[] = [];
