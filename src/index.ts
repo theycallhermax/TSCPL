@@ -8,7 +8,6 @@ import { exec } from "child_process";
 import { compile } from "../lib/libtscpl.js";
 
 const argv: object = yargs(hideBin(process.argv))
-    .version(false)
     .option("run", {
         alias: "r",
         type: "string",
@@ -30,11 +29,6 @@ const argv: object = yargs(hideBin(process.argv))
     })
     .argv;
 
-if (argv.version || argv.v) {
-    console.log("2023.04.17");
-    exit(0);
-}
-
 if (argv._[0] === undefined) {
     console.log("TSCPL is a compiler inspired by ACPL powered by libtscpl. It's goal is to provide a ACPL compiler written in TypeScript.");
     console.log("");
@@ -50,8 +44,6 @@ if (argv._[0] === undefined) {
 
 const output_file: string = (argv.output || argv.o ? argv.output || argv.o : `${argv._[0].split(".acpl")[0]}.ts`);
 
-console.log(chalk.yellow(`Compiling ${chalk.yellowBright.bold(argv._[0])}...`));
-
 try {
     compile(argv._[0], output_file, {
         ignore_errors: argv.ignore || argv.i
@@ -61,8 +53,6 @@ try {
     console.error(chalk.red(`Unsuccessfully compiled ${chalk.red.bold(argv._[0])}.`));
     exit(1);
 }
-
-console.log(chalk.green(`Successfully compiled ${chalk.greenBright.bold(argv._[0])} as ${chalk.greenBright.bold(`${output_file}`)}.`));
 
 if (argv.run || argv.r) {
     console.log(chalk.yellow(`Running ${chalk.yellowBright.bold(`${output_file}`)}...`));
