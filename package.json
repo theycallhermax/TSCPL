@@ -1,6 +1,6 @@
 {
     "name": "tscpl",
-    "version": "2023.04.17",
+    "version": "2023.04.28",
     "description": "Port of @RJmsG's ACPL to TypeScript",
     "main": "./lib/libtscpl.js",
     "type": "module",
