@@ -50,12 +50,10 @@ try {
     });
 } catch(e) {
     console.log(chalk.red(`${e} of ${chalk.red.bold(argv._[0])}`));
-    console.error(chalk.red(`Unsuccessfully compiled ${chalk.red.bold(argv._[0])}.`));
     exit(1);
 }
 
 if (argv.run || argv.r) {
-    console.log(chalk.yellow(`Running ${chalk.yellowBright.bold(`${output_file}`)}...`));
     exec(`npx tsc --module esnext --target esnext ${argv._[0].split(".acpl")[0]}.ts`, (error, stdout, stderr) => {
         if (error) {
             console.error(error);
